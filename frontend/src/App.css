@@ -1,0 +1,97 @@
+/* Additional app styles */
+.btn-primary {
+  @apply bg-primary text-white px-6 py-3 font-medium transition-all duration-200;
+}
+
+.btn-primary:hover {
+  @apply bg-primary-light;
+}
+
+.btn-secondary {
+  @apply border border-primary text-primary px-6 py-3 font-medium transition-all duration-200;
+}
+
+.btn-secondary:hover {
+  @apply bg-primary text-white;
+}
+
+.card {
+  @apply bg-surface border border-border p-6 transition-all duration-200;
+}
+
+.card:hover {
+  @apply shadow-md -translate-y-0.5;
+}
+
+.input {
+  @apply w-full px-4 py-3 border border-border bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors;
+}
+
+.glass-header {
+  @apply bg-base-light/80 backdrop-blur-md border-b border-border;
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply h-2 bg-border rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-primary transition-all duration-500 ease-out;
+}
+
+/* Quiz styles */
+.quiz-option {
+  @apply p-4 border border-border cursor-pointer transition-all duration-200;
+}
+
+.quiz-option:hover {
+  @apply border-primary bg-primary/5;
+}
+
+.quiz-option.selected {
+  @apply border-primary bg-primary/10;
+}
+
+.quiz-option.correct {
+  @apply border-green-500 bg-green-50;
+}
+
+.quiz-option.incorrect {
+  @apply border-red-500 bg-red-50;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Video container */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
