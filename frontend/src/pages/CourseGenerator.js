@@ -82,7 +82,7 @@ export default function CourseGenerator() {
             <div className="w-10 h-10 bg-primary flex items-center justify-center">
               <BookOpen className="w-6 h-6 text-white" />
             </div>
-            <span className="font-heading text-xl font-semibold text-primary">CourseForge</span>
+            <span className="font-heading text-xl font-semibold text-primary">Chiron</span>
           </Link>
           
           <Link 

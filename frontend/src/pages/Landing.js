@@ -55,7 +55,7 @@ export default function Landing() {
             <div className="w-10 h-10 bg-primary flex items-center justify-center">
               <BookOpen className="w-6 h-6 text-white" />
             </div>
-            <span className="font-heading text-xl font-semibold text-primary">CourseForge</span>
+            <span className="font-heading text-xl font-semibold text-primary">Chiron</span>
           </div>
           <button
             data-testid="header-get-started-btn"
@@ -145,7 +145,7 @@ export default function Landing() {
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl font-bold mb-4">How It Works</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              CourseForge combines AI content generation with curated YouTube videos 
+              Chiron combines AI content generation with curated YouTube videos 
               to create comprehensive learning experiences.
             </p>
           </div>
@@ -177,7 +177,7 @@ export default function Landing() {
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl font-bold mb-4">Built For Everyone</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Whether you're preparing for exams or learning new skills, CourseForge adapts to your level.
+              Whether you're preparing for exams or learning new skills, Chiron adapts to your level.
             </p>
           </div>
           
@@ -228,9 +228,9 @@ export default function Landing() {
               <div className="w-8 h-8 bg-primary flex items-center justify-center">
                 <BookOpen className="w-4 h-4 text-white" />
               </div>
-              <span className="font-heading text-white">CourseForge</span>
+              <span className="font-heading text-white">Chiron</span>
             </div>
-            <p className="text-sm">© 2025 CourseForge. Powered by AI.</p>
+            <p className="text-sm">© 2025 Chiron. Powered by AI.</p>
           </div>
         </div>
       </footer>

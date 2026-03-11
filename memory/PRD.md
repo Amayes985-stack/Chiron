@@ -1,4 +1,4 @@
-# CourseForge - AI Course Builder PRD
+# Chiron - AI Course Builder PRD
 
 ## Original Problem Statement
 Build an AI Course Builder - a "prompt to course" platform where users input a topic (like "pointers in C++") and AI automatically generates a multi-lesson course with embedded YouTube videos, quizzes, and questions. Target audience: School students, College students, and Professional learners.
