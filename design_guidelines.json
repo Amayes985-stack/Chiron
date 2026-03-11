@@ -1,0 +1,131 @@
+{
+  "identity": {
+    "name": "E1",
+    "mission": "Create an AI Course Builder that feels like an 'Intellectual Explorer' - blending the clarity of Swiss design with the warmth of organic growth.",
+    "principles": [
+      "Fusion over Imitation: Mix Swiss precision with organic warmth.",
+      "Emotion First: Learning is growth (Organic) + structure (Swiss).",
+      "Content is King: The course material must shine; UI should be the stage, not the show.",
+      "Negative Space: Value empty areas for focus.",
+      "Contrast: High contrast for readability and action."
+    ]
+  },
+  "visual_strategy": {
+    "theme": "Light Mode Dominant (Intellectual/Academic) with Dark Mode Toggle",
+    "archetype": "The Intellectual Explorer (Swiss Structure + Organic Warmth)",
+    "mood": "Smart, Efficient, Trustworthy, Encouraging",
+    "colors": {
+      "palette": {
+        "base": {
+          "light": "#FDFCF8",
+          "dark": "#1A1A1A"
+        },
+        "primary": {
+          "name": "Deep Forest",
+          "value": "#1A4D2E",
+          "description": "Used for primary actions, branding, and stability."
+        },
+        "secondary": {
+          "name": "Burnt Orange",
+          "value": "#C2410C",
+          "description": "Used for accents, call-to-actions, and energy points."
+        },
+        "neutral": {
+          "text_primary": "#1F2937",
+          "text_secondary": "#4B5563",
+          "border": "#E5E7EB",
+          "surface": "#FFFFFF"
+        },
+        "forbidden": [
+          "#007AFF (Generic SaaS Blue)",
+          "#7351B7 (Generic AI Purple)",
+          "#1B93A4 (Teal)"
+        ]
+      },
+      "gradients": "None. Use flat, deep colors or subtle noise textures."
+    },
+    "typography": {
+      "headings": {
+        "family": "Space Grotesk",
+        "weights": ["600", "700"],
+        "description": "Tech-forward but human. Use for H1-H3."
+      },
+      "body": {
+        "family": "DM Sans",
+        "weights": ["400", "500", "700"],
+        "description": "Geometric, friendly, highly readable."
+      },
+      "code": {
+        "family": "JetBrains Mono",
+        "description": "For code snippets and technical terms."
+      }
+    },
+    "spacing": {
+      "scale": "Generous. Use p-6 to p-12 for containers.",
+      "grid": "Bento Grid (Mode A for Marketing, Mode B for Dashboard)."
+    },
+    "shapes": {
+      "radius": "rounded-none or rounded-sm (Swiss precision)",
+      "borders": "1px solid border-border"
+    }
+  },
+  "components": {
+    "strategy": "Use Shadcn UI for interaction, custom HTML/Tailwind for layout.",
+    "customization": {
+      "buttons": "Sharp edges or minimal rounded (rounded-md). Primary: Deep Forest bg, White text. Secondary: Outline.",
+      "cards": "Flat, 1px border, no shadow by default. Hover: slight lift + shadow-sm.",
+      "inputs": "High contrast borders on focus. bg-surface.",
+      "navigation": "Sticky glassmorphism header (bg-base/80 backdrop-blur-md)."
+    },
+    "libraries": {
+      "icons": "lucide-react",
+      "charts": "recharts (via shadcn/charts)",
+      "motion": "framer-motion",
+      "toast": "sonner"
+    }
+  },
+  "layout_patterns": {
+    "marketing": {
+      "hero": "Split screen or Center focus. Large typography. Abstract organic imagery.",
+      "features": "Bento Grid (Tetris Mode). Asymmetrical.",
+      "testimonials": "Masonry or Horizontal Scroll (Marquee)."
+    },
+    "dashboard": {
+      "structure": "Sidebar navigation (collapsible). Top header for search/profile.",
+      "grid": "High Density Grid (Mode B). 100% height widgets.",
+      "course_view": "Split view: Video/Content on left (70%), Playlist/Chat on right (30%)."
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_main": {
+        "url": "https://images.unsplash.com/photo-1761492190275-129cf71ff124?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHw0fHxzdHVkZW50JTIwc3R1ZHlpbmclMjBsaWJyYXJ5JTIwYWVzdGhldGljfGVufDB8fHx8MTc3MzE4OTU5M3ww&ixlib=rb-4.1.0&q=85",
+        "alt": "Student studying in a modern library with organic architecture"
+      },
+      "course_coding": {
+        "url": "https://images.unsplash.com/photo-1759661881353-5b9cc55e1cf4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzR8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBjb21wdXRlciUyMHNjcmVlbiUyMGFlc3RoZXRpY3xlbnwwfHx8fDE3NzMxODk1OTN8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Computer screen displaying code"
+      },
+      "course_design": {
+        "url": "https://images.unsplash.com/photo-1769117617135-0d6bb3bbf240?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwyfHxtaW5pbWFsaXN0JTIwYWJzdHJhY3QlMjBnZW9tZXRyeSUyMGFydHxlbnwwfHx8fDE3NzMxODk1OTR8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Abstract geometric art for design course"
+      }
+    }
+  },
+  "universal_guidelines": [
+    "Do not use generic 'AI' gradients (purple/blue). Use solid, deep colors.",
+    "Ensure all text has high contrast (APCA standards).",
+    "Use 'data-testid' on all interactive elements.",
+    "Don't center everything. Use asymmetry for interest.",
+    "Add micro-interactions (hover, focus) to everything.",
+    "Use 'sonner' for toasts.",
+    "Components must use named exports.",
+    "Pages must use default exports."
+  ],
+  "instructions_to_main_agent": "Implement the design system starting with the global CSS variables for colors. Install necessary fonts (Space Grotesk, DM Sans). Build the layout shell (Sidebar/Header). Then implement the pages. Use the provided image URLs. Do not ask for clarification.",
+  "tech_stack": {
+    "frontend": "React, Tailwind, Shadcn UI, Framer Motion",
+    "backend": "FastAPI, MongoDB",
+    "auth": "Google OAuth"
+  }
+}
