@@ -260,12 +260,13 @@ async def search_youtube_videos(query: str, max_results: int = 3) -> List[dict]:
 
 # ==================== AI COURSE GENERATION ====================
 
-async def generate_course_content(prompt: str, difficulty: str, num_lessons: int) -> dict:
-    """Generate course content using Claude Sonnet 4.5"""
-    chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
-        session_id=f"course_{uuid.uuid4().hex[:8]}",
-        system_message="""You are an expert educational course creator. Create structured, engaging courses with clear learning objectives.
+import asyncio
+import json
+
+async def generate_course_content(prompt: str, difficulty: str, num_lessons: int, max_retries: int = 3) -> dict:
+    """Generate course content using Claude Sonnet 4.5 with retry logic"""
+    
+    system_prompt = """You are an expert educational course creator. Create structured, engaging courses with clear learning objectives.
         
 IMPORTANT: You must respond ONLY with valid JSON, no markdown, no code blocks, just pure JSON.
 The JSON must have this exact structure:
@@ -276,7 +277,7 @@ The JSON must have this exact structure:
         {
             "title": "Lesson Title",
             "description": "What students will learn",
-            "content": "Detailed lesson content with examples and explanations (at least 300 words)",
+            "content": "Detailed lesson content with examples and explanations (at least 200 words)",
             "search_query": "YouTube search query for relevant video",
             "quiz": [
                 {
@@ -289,41 +290,59 @@ The JSON must have this exact structure:
         }
     ]
 }"""
-    ).with_model("anthropic", "claude-sonnet-4-5-20250929")
     
-    user_message = UserMessage(
-        text=f"""Create a {difficulty} level course about: {prompt}
+    user_prompt = f"""Create a {difficulty} level course about: {prompt}
 
 Requirements:
 - Generate exactly {num_lessons} lessons
 - Each lesson should build on the previous one
-- Include 2-3 quiz questions per lesson with 4 options each
+- Include 2 quiz questions per lesson with 4 options each
 - Make content appropriate for the {difficulty} level
 - Include practical examples and clear explanations
 - For search_query, provide a specific YouTube search term to find relevant educational videos
 
 Respond with ONLY valid JSON, no additional text or formatting."""
-    )
+
+    last_error = None
     
-    response = await chat.send_message(user_message)
+    for attempt in range(max_retries):
+        try:
+            chat = LlmChat(
+                api_key=EMERGENT_LLM_KEY,
+                session_id=f"course_{uuid.uuid4().hex[:8]}",
+                system_message=system_prompt
+            ).with_model("anthropic", "claude-sonnet-4-5-20250929")
+            
+            user_message = UserMessage(text=user_prompt)
+            response = await chat.send_message(user_message)
+            
+            # Clean response - remove any markdown formatting
+            cleaned = response.strip()
+            if cleaned.startswith("```json"):
+                cleaned = cleaned[7:]
+            if cleaned.startswith("```"):
+                cleaned = cleaned[3:]
+            if cleaned.endswith("```"):
+                cleaned = cleaned[:-3]
+            cleaned = cleaned.strip()
+            
+            return json.loads(cleaned)
+            
+        except json.JSONDecodeError as e:
+            print(f"JSON parse error on attempt {attempt + 1}: {e}")
+            print(f"Response: {cleaned[:500] if 'cleaned' in dir() else 'N/A'}")
+            last_error = HTTPException(status_code=500, detail="Failed to parse AI response")
+            
+        except Exception as e:
+            print(f"AI generation error on attempt {attempt + 1}: {type(e).__name__}: {e}")
+            last_error = HTTPException(status_code=502, detail=f"AI service temporarily unavailable: {str(e)}")
+            
+            # Wait before retry (exponential backoff)
+            if attempt < max_retries - 1:
+                await asyncio.sleep(2 ** attempt)
     
-    # Clean response - remove any markdown formatting
-    cleaned = response.strip()
-    if cleaned.startswith("```json"):
-        cleaned = cleaned[7:]
-    if cleaned.startswith("```"):
-        cleaned = cleaned[3:]
-    if cleaned.endswith("```"):
-        cleaned = cleaned[:-3]
-    cleaned = cleaned.strip()
-    
-    import json
-    try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError as e:
-        print(f"JSON parse error: {e}")
-        print(f"Response: {cleaned[:500]}")
-        raise HTTPException(status_code=500, detail="Failed to parse AI response")
+    # All retries failed
+    raise last_error or HTTPException(status_code=500, detail="Failed to generate course content")
 
 # ==================== COURSE ENDPOINTS ====================
 
