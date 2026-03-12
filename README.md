@@ -219,8 +219,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
 
-**Built with ❤️ for learners everywhere**
-
 *Named after Chiron, the wise centaur of Greek mythology who taught heroes like Achilles and Hercules*
 
 </div>
